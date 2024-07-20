@@ -1,5 +1,23 @@
 # RUST-SNMP
-Dependency-free basic SNMPv2 client in Rust.
+Basic SNMPv2 client in Rust.
 
 [![Documentation](https://docs.rs/snmp/badge.svg)](https://docs.rs/snmp/)
-[![Build Status](https://travis-ci.org/hroi/rust-snmp.svg?branch=master)](https://travis-ci.org/hroi/rust-snmp)
+
+### Support
+---
+- **GET**
+- **GETNEXT**
+- **GETBULK**
+- **SET**
+- **Basic SNMPv2 types**
+- **Synchronous requests**
+- **UDP transport**
+
+### Todo
+---
+- **SNMPv1**
+- **SNMPv3**
+- **MIBs**
+- **Async requests**
+- **Transports other than UDP**
+
