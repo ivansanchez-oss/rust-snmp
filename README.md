@@ -9,6 +9,7 @@ Support
 - SET
 - Basic SNMPv2 types
 - Synchronous requests
+- Async requests
 - UDP transport
 
 Todo
@@ -16,6 +17,5 @@ Todo
 - SNMPv1
 - SNMPv3
 - MIBs
-- Async requests
 - Transports other than UDP
 
