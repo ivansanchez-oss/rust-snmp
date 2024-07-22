@@ -72,7 +72,7 @@ impl AsyncSession {
         );
 
         let recv_len = self.send_and_recv().await?;
-
+        let req_id = self.req_id;
         self.req_id = self.req_id.wrapping_add(1);
 
         let pdu_bytes = &self.recv_buf[..recv_len];
@@ -82,7 +82,7 @@ impl AsyncSession {
             return Err(SnmpError::AsnWrongType);
         }
 
-        if resp.req_id != self.req_id {
+        if resp.req_id != req_id {
             return Err(SnmpError::RequestIdMismatch);
         }
 
@@ -102,6 +102,7 @@ impl AsyncSession {
         );
 
         let recv_len = self.send_and_recv().await?;
+        let req_id = self.req_id;
         self.req_id = self.req_id.wrapping_add(1);
 
         let pdu_bytes = &self.recv_buf[..recv_len];
@@ -111,7 +112,7 @@ impl AsyncSession {
             return Err(SnmpError::AsnWrongType);
         }
 
-        if resp.req_id != self.req_id {
+        if resp.req_id != req_id {
             return Err(SnmpError::RequestIdMismatch);
         }
 
@@ -138,6 +139,7 @@ impl AsyncSession {
         );
 
         let recv_len = self.send_and_recv().await?;
+        let req_id = self.req_id;
         self.req_id = self.req_id.wrapping_add(1);
 
         let pdu_bytes = &self.recv_buf[..recv_len];
@@ -147,7 +149,7 @@ impl AsyncSession {
             return Err(SnmpError::AsnWrongType);
         }
 
-        if resp.req_id != self.req_id {
+        if resp.req_id != req_id {
             return Err(SnmpError::RequestIdMismatch);
         }
 
@@ -179,6 +181,7 @@ impl AsyncSession {
         );
 
         let recv_len = self.send_and_recv().await?;
+        let req_id = self.req_id;
         self.req_id = self.req_id.wrapping_add(1);
 
         let pdu_bytes = &self.recv_buf[..recv_len];
@@ -188,7 +191,7 @@ impl AsyncSession {
             return Err(SnmpError::AsnWrongType);
         }
 
-        if resp.req_id != self.req_id {
+        if resp.req_id != req_id {
             return Err(SnmpError::RequestIdMismatch);
         }
 

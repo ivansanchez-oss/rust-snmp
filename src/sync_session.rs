@@ -72,6 +72,7 @@ impl SyncSession {
         );
 
         let recv_len = Self::send_and_recv(&self.socket, &self.send_pdu, &mut self.recv_buf[..])?;
+        let req_id = self.req_id;
         self.req_id = self.req_id.wrapping_add(1);
 
         let pdu_bytes = &self.recv_buf[..recv_len];
@@ -81,7 +82,7 @@ impl SyncSession {
             return Err(SnmpError::AsnWrongType);
         }
 
-        if resp.req_id != self.req_id {
+        if resp.req_id != req_id {
             return Err(SnmpError::RequestIdMismatch);
         }
 
@@ -101,6 +102,7 @@ impl SyncSession {
         );
 
         let recv_len = Self::send_and_recv(&self.socket, &self.send_pdu, &mut self.recv_buf[..])?;
+        let req_id = self.req_id;
         self.req_id = self.req_id.wrapping_add(1);
 
         let pdu_bytes = &self.recv_buf[..recv_len];
@@ -110,7 +112,7 @@ impl SyncSession {
             return Err(SnmpError::AsnWrongType);
         }
 
-        if resp.req_id != self.req_id {
+        if resp.req_id != req_id {
             return Err(SnmpError::RequestIdMismatch);
         }
 
@@ -137,6 +139,7 @@ impl SyncSession {
         );
 
         let recv_len = Self::send_and_recv(&self.socket, &self.send_pdu, &mut self.recv_buf[..])?;
+        let req_id = self.req_id;
         self.req_id = self.req_id.wrapping_add(1);
 
         let pdu_bytes = &self.recv_buf[..recv_len];
@@ -146,7 +149,7 @@ impl SyncSession {
             return Err(SnmpError::AsnWrongType);
         }
 
-        if resp.req_id != self.req_id {
+        if resp.req_id != req_id {
             return Err(SnmpError::RequestIdMismatch);
         }
 
@@ -178,6 +181,7 @@ impl SyncSession {
         );
 
         let recv_len = Self::send_and_recv(&self.socket, &self.send_pdu, &mut self.recv_buf[..])?;
+        let req_id = self.req_id;
         self.req_id = self.req_id.wrapping_add(1);
 
         let pdu_bytes = &self.recv_buf[..recv_len];
@@ -187,7 +191,7 @@ impl SyncSession {
             return Err(SnmpError::AsnWrongType);
         }
 
-        if resp.req_id != self.req_id {
+        if resp.req_id != req_id {
             return Err(SnmpError::RequestIdMismatch);
         }
 
