@@ -1,23 +1,21 @@
 # RUST-SNMP
 Basic SNMPv2 client in Rust.
 
-[![Documentation](https://docs.rs/snmp/badge.svg)](https://docs.rs/snmp/)
+Support
+-------
+- GET
+- GETNEXT
+- GETBULK
+- SET
+- Basic SNMPv2 types
+- Synchronous requests
+- UDP transport
 
-### Support
----
-- **GET**
-- **GETNEXT**
-- **GETBULK**
-- **SET**
-- **Basic SNMPv2 types**
-- **Synchronous requests**
-- **UDP transport**
-
-### Todo
----
-- **SNMPv1**
-- **SNMPv3**
-- **MIBs**
-- **Async requests**
-- **Transports other than UDP**
+Todo
+----
+- SNMPv1
+- SNMPv3
+- MIBs
+- Async requests
+- Transports other than UDP
 
