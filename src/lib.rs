@@ -722,13 +722,17 @@ impl<'a> AsnReader<'a> {
 
     pub fn read_raw(&mut self, expected_ident: u8) -> SnmpResult<&'a [u8]> {
         let ident = self.read_byte()?;
+
         if ident != expected_ident {
             return Err(SnmpError::AsnWrongType);
         }
+
         let val_len = self.read_length()?;
+
         if val_len > self.inner.len() {
             return Err(SnmpError::AsnInvalidLen);
         }
+
         let (val, remaining) = self.inner.split_at(val_len);
         self.inner = remaining;
         Ok(val)
@@ -1048,11 +1052,15 @@ impl<'a> SnmpPdu<'a> {
     pub fn from_bytes(bytes: &'a [u8]) -> SnmpResult<SnmpPdu<'a>> {
         let seq = AsnReader::from_bytes(bytes).read_raw(asn1::TYPE_SEQUENCE)?;
         let mut rdr = AsnReader::from_bytes(seq);
+
         let version = rdr.read_asn_integer()?;
+
         if version != snmp::VERSION_2 {
             return Err(SnmpError::UnsupportedVersion);
         }
+
         let community = rdr.read_asn_octetstring()?;
+
         let ident = rdr.peek_byte()?;
         let message_type = SnmpMessageType::from_ident(ident)?;
 

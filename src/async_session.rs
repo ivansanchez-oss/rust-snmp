@@ -202,3 +202,42 @@ impl AsyncSession {
         Ok(resp)
     }
 }
+
+pub struct AsyncTrapSession {
+    socket: UdpSocket,
+    recv_buf: [u8; BUFFER_SIZE],
+}
+
+impl AsyncTrapSession {
+    pub async fn new<SA>(addr: SA) -> io::Result<Self>
+    where
+        SA: ToSocketAddrs,
+    {
+        let socket = UdpSocket::bind(addr).await?;
+
+        Ok(AsyncTrapSession {
+            socket,
+            recv_buf: [0; 4096],
+        })
+    }
+
+    async fn recv(&mut self) -> SnmpResult<usize> {
+        let Ok(len) = self.socket.recv(&mut self.recv_buf[..]).await else {
+            return Err(SnmpError::ReceiveError);
+        };
+
+        Ok(len)
+    }
+
+    pub async fn recv_trap(&mut self) -> SnmpResult<SnmpPdu> {
+        let len = self.recv().await?;
+        let pdu_bytes = &self.recv_buf[..len];
+        let message = SnmpPdu::from_bytes(pdu_bytes)?;
+
+        if message.message_type != SnmpMessageType::Trap {
+            return Err(SnmpError::AsnWrongType);
+        }
+
+        Ok(message)
+    }
+}
